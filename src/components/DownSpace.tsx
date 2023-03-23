@@ -1,10 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { FormValue, ValueProps } from "../App";
 
 //RiDeleteBin5Line
-function DownSpace() {
-  return <Wrapper>downSpace</Wrapper>;
-}
+const DownSpace: React.FC<ValueProps> = ({ fetData, setCount }) => {
+  return (
+    <Wrapper>
+      {fetData?.map((data) => (
+        <DataContent key={data.id}>{data.text}</DataContent>
+      ))}
+    </Wrapper>
+  );
+};
 const Wrapper = styled.div`
   width: 100%;
   height: 70%;
@@ -13,4 +20,9 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
+const DataContent = styled.div`
+  font-size: 40px;
+  color: white;
+  margin: 10px 0px;
+`;
 export default DownSpace;

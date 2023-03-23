@@ -3,27 +3,23 @@ import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-interface FormValue {
-  id: number;
-  text: string;
+import { FormValue, ValueProps } from "../App";
+interface FetchCount {
+  setCount: React.Dispatch<React.SetStateAction<number>>;
 }
-const fetdata = [
-  { id: 1, text: "react" },
-  { id: 2, text: "typescript" },
-  { id: 3, text: "javascript" },
-];
-console.log(fetdata);
-function TopSpace() {
-  const { register, handleSubmit } = useForm<FormValue>();
 
+const TopSpace = ({ fetData, setCount }: ValueProps) => {
+  const { register, handleSubmit } = useForm<FormValue>();
   const submitFunc = (data: FormValue) => {
-    fetdata.push({ id: 3, text: data.text });
+    setCount(Date.now());
+    let original = JSON.parse(localStorage.getItem("text") || "");
+    let newText = [data];
+    if (original) {
+      newText = [...newText, ...original];
+    }
+    localStorage.setItem("text", JSON.stringify(newText));
   };
 
-  useEffect(() => {
-    localStorage.setItem("text", JSON.stringify([...fetdata]));
-  }, []);
   return (
     <Wrapper>
       <TodoTitle>React + TypeScript TodoList</TodoTitle>
@@ -33,7 +29,7 @@ function TopSpace() {
       </TopContents>
     </Wrapper>
   );
-}
+};
 
 const Wrapper = styled.div`
   width: 100%;
