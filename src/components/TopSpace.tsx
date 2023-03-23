@@ -17,26 +17,23 @@ const TopSpace = ({
   setLengthCount,
 }: ValueProps) => {
   const { register, handleSubmit } = useForm<FormValue>();
-  console.log(initialState.length);
 
-  let lea = {};
+  let dataItem = {};
   const submitFunc = (data: FormValue) => {
-    console.log(data);
     setCount(Date.now());
     if (localStorage.getItem("text") !== null) {
       var original = JSON.parse(localStorage.getItem("text") || "");
     }
-    if (lengthCount == 3) {
-      lea = { ...data, id: lengthCount + 1 };
+    if (lengthCount === 3) {
+      dataItem = { ...data, id: lengthCount + 1 };
       setLengthCount(lengthCount + 2);
     } else {
-      lea = { ...data, id: lengthCount };
+      dataItem = { ...data, id: lengthCount };
       setLengthCount(lengthCount + 1);
     }
-    let newText = [lea];
-    console.log(newText);
+    let newText = [dataItem];
     if (original) {
-      newText = [lea, ...original];
+      newText = [dataItem, ...original];
     }
     localStorage.setItem("text", JSON.stringify(newText));
   };

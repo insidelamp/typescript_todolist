@@ -32,6 +32,7 @@ function App() {
       setFetData([...storageArray, ...fetchData]);
     }
   }, [count]);
+
   return (
     <Wrapper>
       <TopSpace
