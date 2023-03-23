@@ -4,18 +4,39 @@ import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormValue, ValueProps } from "../App";
+import { initialState } from "../components/Data";
+
 interface FetchCount {
   setCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const TopSpace = ({ fetData, setCount }: ValueProps) => {
+const TopSpace = ({
+  fetData,
+  setCount,
+  lengthCount,
+  setLengthCount,
+}: ValueProps) => {
   const { register, handleSubmit } = useForm<FormValue>();
+  console.log(initialState.length);
+
+  let lea = {};
   const submitFunc = (data: FormValue) => {
+    console.log(data);
     setCount(Date.now());
-    let original = JSON.parse(localStorage.getItem("text") || "");
-    let newText = [data];
+    if (localStorage.getItem("text") !== null) {
+      var original = JSON.parse(localStorage.getItem("text") || "");
+    }
+    if (lengthCount == 3) {
+      lea = { ...data, id: lengthCount + 1 };
+      setLengthCount(lengthCount + 2);
+    } else {
+      lea = { ...data, id: lengthCount };
+      setLengthCount(lengthCount + 1);
+    }
+    let newText = [lea];
+    console.log(newText);
     if (original) {
-      newText = [...newText, ...original];
+      newText = [lea, ...original];
     }
     localStorage.setItem("text", JSON.stringify(newText));
   };

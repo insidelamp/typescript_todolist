@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import TopSpace from "./components/TopSpace";
 import DownSpace from "./components/DownSpace";
 import styled from "styled-components";
+import { initialState } from "./components/Data";
 
 // export interface FormValue {
 //   id: number;
@@ -16,26 +17,35 @@ export interface FormValue {
 export interface ValueProps {
   fetData: FormValue[];
   setCount: React.Dispatch<React.SetStateAction<number>>;
+  lengthCount: number;
+  setLengthCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function App() {
-  const [fetData, setFetData] = useState([
-    { id: 1, text: "react" },
-    { id: 2, text: "typescript" },
-    { id: 3, text: "javascript" },
-  ]);
+  const [fetData, setFetData] = useState(initialState);
   const [count, setCount] = useState<number>(0);
-  let fetchData = fetData;
+  const [lengthCount, setLengthCount] = useState<number>(initialState.length);
+  let fetchData = initialState;
   useEffect(() => {
     if (localStorage.getItem("text") !== null) {
       let storageArray = JSON.parse(localStorage.getItem("text") || "");
-      setFetData([...storageArray, fetchData]);
+      setFetData([...storageArray, ...fetchData]);
     }
   }, [count]);
   return (
     <Wrapper>
-      <TopSpace fetData={fetData} setCount={setCount} />
-      <DownSpace fetData={fetData} setCount={setCount} />
+      <TopSpace
+        fetData={fetData}
+        setCount={setCount}
+        lengthCount={lengthCount}
+        setLengthCount={setLengthCount}
+      />
+      <DownSpace
+        fetData={fetData}
+        setCount={setCount}
+        lengthCount={lengthCount}
+        setLengthCount={setLengthCount}
+      />
       <A />
       <A className="rightTop" />
       <A className="leftDown" />
