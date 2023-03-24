@@ -1,51 +1,38 @@
 import React, { useState, useEffect } from "react";
-import TopSpace from "./components/TopSpace";
-import DownSpace from "./components/DownSpace";
+import TopSpace from "./pages/TopSpace";
+import DownSpace from "./pages/DownSpace";
 import styled from "styled-components";
-import { initialState } from "./components/Data";
-
-// export interface FormValue {
-//   id: number;
-//   text: string;
-// }
 
 export interface FormValue {
   id: number;
   text: string;
+  checkHover: boolean;
 }
 
 export interface ValueProps {
   fetData: FormValue[];
+  setFetData: any;
   setCount: React.Dispatch<React.SetStateAction<number>>;
-  lengthCount: number;
-  setLengthCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function App() {
-  const [fetData, setFetData] = useState(initialState);
+  const [fetData, setFetData] = useState([]);
   const [count, setCount] = useState<number>(0);
-  const [lengthCount, setLengthCount] = useState<number>(initialState.length);
-  let fetchData = initialState;
   useEffect(() => {
     if (localStorage.getItem("text") !== null) {
-      let storageArray = JSON.parse(localStorage.getItem("text") || "");
-      setFetData([...storageArray, ...fetchData]);
+      let fetchData = JSON.parse(localStorage.getItem("text") || "");
+      console.log(fetchData);
+      setFetData(fetchData);
     }
   }, [count]);
 
   return (
     <Wrapper>
-      <TopSpace
-        fetData={fetData}
-        setCount={setCount}
-        lengthCount={lengthCount}
-        setLengthCount={setLengthCount}
-      />
+      <TopSpace fetData={fetData} setFetData={setFetData} setCount={setCount} />
       <DownSpace
         fetData={fetData}
+        setFetData={setFetData}
         setCount={setCount}
-        lengthCount={lengthCount}
-        setLengthCount={setLengthCount}
       />
       <A />
       <A className="rightTop" />

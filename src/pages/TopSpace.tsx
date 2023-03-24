@@ -1,40 +1,25 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormValue, ValueProps } from "../App";
-import { initialState } from "../components/Data";
 
-interface FetchCount {
-  setCount: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const TopSpace = ({
-  fetData,
-  setCount,
-  lengthCount,
-  setLengthCount,
-}: ValueProps) => {
+const TopSpace = ({ fetData, setFetData, setCount }: ValueProps) => {
   const { register, handleSubmit } = useForm<FormValue>();
-
   let dataItem = {};
   const submitFunc = (data: FormValue) => {
     setCount(Date.now());
     if (localStorage.getItem("text") !== null) {
       var original = JSON.parse(localStorage.getItem("text") || "");
+      console.log(original);
     }
-    if (lengthCount === 3) {
-      dataItem = { ...data, id: lengthCount + 1 };
-      setLengthCount(lengthCount + 2);
-    } else {
-      dataItem = { ...data, id: lengthCount };
-      setLengthCount(lengthCount + 1);
-    }
+
+    dataItem = { ...data, id: fetData.length + 1, checkHover: false };
     let newText = [dataItem];
     if (original) {
       newText = [dataItem, ...original];
     }
+
     localStorage.setItem("text", JSON.stringify(newText));
   };
 
