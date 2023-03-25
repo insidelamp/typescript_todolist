@@ -7,6 +7,7 @@ export interface FormValue {
   id: number;
   text: string;
   checkHover: boolean;
+  checkUpdate: boolean;
 }
 
 export interface ValueProps {
@@ -21,7 +22,6 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem("text") !== null) {
       let fetchData = JSON.parse(localStorage.getItem("text") || "");
-      console.log(fetchData);
       setFetData(fetchData);
     }
   }, [count]);
@@ -55,14 +55,14 @@ const A = styled.div`
   left: 0;
 
   z-index: 1;
-  background: linear-gradient(135deg, #03045e, #caf0f8);
+  background: linear-gradient(135deg, #caf0f8, #03045e);
   &.rightTop {
     width: 50%;
     height: 50vh;
     position: absolute;
     top: 0;
     left: 50%;
-    background: linear-gradient(225deg, #03045e, #caf0f8);
+    background: linear-gradient(225deg, #caf0f8, #03045e);
   }
   &.leftDown {
     width: 50%;
@@ -70,7 +70,7 @@ const A = styled.div`
     position: absolute;
     top: 50%;
     left: 0;
-    background: linear-gradient(45deg, #03045e, #caf0f8);
+    background: linear-gradient(45deg, #caf0f8, #03045e);
   }
   &.rightDown {
     width: 50%;
@@ -78,7 +78,7 @@ const A = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    background: linear-gradient(315deg, #03045e, #caf0f8);
+    background: linear-gradient(315deg, #caf0f8, #03045e);
   }
 `;
 
