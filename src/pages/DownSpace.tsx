@@ -193,8 +193,8 @@ const DownWrapper = styled.div`
   &::after {
     content: "";
     position: absolute;
-    left: -2px;
-    top: -2px;
+    left: -7.5px;
+    top: -7.5px;
     background: linear-gradient(
       45deg,
       #fb0094,
@@ -209,8 +209,8 @@ const DownWrapper = styled.div`
       #ff0000
     );
     background-size: 400%;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    width: calc(100% + 15px);
+    height: calc(100% + 15px);
     z-index: -1;
     animation: steam 20s linear infinite;
   }
