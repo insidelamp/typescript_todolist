@@ -8,4 +8,4 @@ yarn start  <- 프로젝트 실행
 ```
 
 - 사용한 라이브러리
-- typeScript
+  - typeScript
